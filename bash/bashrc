@@ -1,0 +1,56 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias bb='sudo bb-wrapper'
+
+COLOR_RED="\033[0;31m"
+COLOR_GREEN="\033[0;32m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_BLUE="\033[0;34m"
+COLOR_WHITE="\033[0;37m"
+COLOR_OCHRE="\033[38;5;95m"
+COLOR_RESET="\033[0m"
+
+function git_branch {
+  local branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  if [ ! "$branch" == "" ]; then
+    status=`git status 2>&1 | tee`
+    dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+    untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+    ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+    newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+    renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+    deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+    bits=""
+    if [ "${renamed}" == "0" ]; then
+      bits=">${bits}"
+    fi
+    if [ "${ahead}" == "0" ]; then
+      bits="*${bits}"
+    fi
+    if [ "${newfile}" == "0" ]; then
+      bits="+${bits}"
+    fi
+    if [ "${untracked}" == "0" ]; then
+      bits="?${bits}"
+    fi
+    if [ "${deleted}" == "0" ]; then
+      bits="x${bits}"
+    fi
+    if [ "${dirty}" == "0" ]; then
+      bits="!${bits}"
+    fi
+    echo -e " ($COLOR_YELLOW$branch$COLOR_RESET) $COLOR_GREEN${bits}$COLOR_RESET"
+  fi
+}
+
+
+PS1="\n[$COLOR_BLUE\w$COLOR_RESET]"
+PS1+="\`git_branch\`"
+PS1+="\n[\u@\h]\\$ "
+export PS1
