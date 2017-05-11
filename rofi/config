@@ -1,0 +1,15 @@
+rofi.width: 32
+rofi.lines: 8
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+
+rofi.padding: 8
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: argb:bb282828, argb:bb282828, argb:ffebdbb2
+rofi.color-normal: argb:00000000, #ebdbb2, argb:00000000, #ebdbb2, #282828
+rofi.color-active: argb:00000000, #458588, argb:00000000, #458588, #282828
+rofi.color-urgent: argb:00000000, #cc241d, argb:00000000, #cc241d, #282828
