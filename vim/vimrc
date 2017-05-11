@@ -1,0 +1,159 @@
+set nocompatible
+
+call plug#begin('~/.vim/plugged')
+
+" Autocompletion
+Plug 'Valloric/YouCompleteMe', {
+  \   'do': './install.py --clang-completer --system-libclang --tern-completer'
+  \ }
+Plug 'rdnetto/YCM-Generator'
+
+" Highlighting
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'omnisharp/omnisharp-vim'
+Plug 'jeaye/color_coded', {
+  \   'do': 'cmake -DDOWNLOAD_CLANG=FALSE . && make && make install'
+  \ }
+
+" Linter integration
+Plug 'scrooloose/syntastic'
+
+" Save keystrokes
+Plug 'easymotion/vim-easymotion'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+
+" Code comments
+Plug 'scrooloose/nerdcommenter'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" UI
+Plug 'scrooloose/nerdtree'
+
+" Undo tree
+Plug 'sjl/gundo.vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Colorschemes
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Syntax highlight
+syntax on
+
+" UI
+set nowrap
+set ruler
+set showmode
+set showmatch
+set showcmd
+set wildmenu
+
+set laststatus=2
+
+" Line numbers
+set number
+autocmd winenter,focusgained * :setlocal number relativenumber
+autocmd winleave,focuslost   * :setlocal number norelativenumber
+
+" Search settings
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set gdefault
+
+" Moving around
+set whichwrap=b,s,<,>,[,]
+
+" Indentation settings
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set smarttab
+set expandtab
+set shiftround
+
+" File saving and reading
+set autowrite
+set autoread
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Enable spell cheking for certain types of files
+autocmd FileType gitcommit setlocal spell
+autocmd FileType text      setlocal spell
+autocmd FileType plaintex  setlocal spell
+autocmd FileType tex       setlocal spell
+
+" Enable alternative keyboard layout (C-^ to switch)
+set keymap=russian-jcuken
+set iminsert=0
+set imsearch=0
+
+" Easier keyboard mappings for keyboard layout switching
+inoremap <M-Space> <C-^>
+nnoremap <M-Space> a<C-^><Esc>
+
+" delimitMate settings
+let delimitMate_expand_space = 1
+let delimitMate_expand_cr = 1
+
+" Splits
+set splitbelow
+set splitright
+
+" ------------------------------------------------------------------------------
+"  KEYBINDINGS
+" ------------------------------------------------------------------------------
+
+" Setup a convenient leader key
+let mapleader = ','
+
+" Clear search highlighting
+nmap <leader>/ :nohlsearch<CR>
+
+" Fix style
+nnoremap <leader>jsf :!eslint --fix %<CR>
+
+" Show the undo tree
+nnoremap <leader>u :GundoToggle<CR>
+
+" NERDTreee shortcuts
+nnoremap <C-S-n> :NERDTreeToggle<CR>
+
+set background=dark
+colorscheme gruvbox
+
+"highlight Normal ctermbg=none
+"highlight NonText ctermbg=none
+
+let g:airline_powerline_fonts=1
+
+" GVim settings
+if has('gui_running')
+  set guioptions-=r
+  set guioptions-=L
+  set guioptions-=T
+  set guioptions-=m
+  set guifont=Mononoki\ Regular\ 11
+  set guiheadroom=0
+endif
+
