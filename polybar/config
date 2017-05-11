@@ -1,0 +1,203 @@
+[settings]
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+[bar/base]
+monitor = ${env:MONITOR:eDP-1}
+width = 100%
+height = 20
+
+background = #bb282828
+foreground = #ffebdbb2
+
+underline-size = 2
+separator = "|"
+padding-top = 10
+padding-left = 4
+padding-right = 4
+module-margin-left = 4
+module-margin-right = 4
+
+wm-restack = i3
+
+tray-position = right
+tray-transparency = true
+tray-padding = 4
+
+fixed-center = true
+
+modules-left =  i3
+modules-center = github clock-date
+modules-right = github cpu memory battery
+
+font-0 = Ubuntu Condensed:size=12;2
+font-1 = fontawesome-webfont:pixelsize=10;2
+font-2 = unifont:antialias=false:fixedsize=8;4
+
+[bar/top]
+inherit-from = bar/base
+
+[bar/external]
+inherit-from = bar/base
+monitor = HDMI-1
+
+[module/github]
+type = internal/github
+
+token = ${file:/home/nechaido/.config/github.token}
+
+empty-notifications = false
+
+format = <label>
+label =   %notifications%
+
+click = xdg-open https://github.com/notifications
+click-left = ${self.click}
+click-center = ${self.click}
+click-right = ${self.click}
+
+
+[module/backlight]
+type = internal/xbacklight
+
+card = intel_backlight
+
+format = <ramp> <label>
+label = %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+battery = BAT0
+adapter = ADP0
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/i3]
+type = internal/i3
+format = <label-state>
+
+pin-workspaces = true
+tray-position = right
+
+index-sort = true
+
+label-focused = %index%
+;label-focused-foreground = #dd
+;label-focused-foreground = #fffdf6e3
+;label-focused-background = #33e4a48a
+label-focused-underline = #eee
+label-focused-padding = 2
+
+label-unfocused = %index% %icon%
+label-unfocused-padding = 2
+;label-unfocused-background = #373B41
+;label-unfocused-foreground = #42c2f4
+
+label-urgent = ! %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+label-urgent-font = 4
+label-urgent-padding = 2
+
+label-visible = x %index%
+label-visible-foreground = #444
+label-visible-padding = 2
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label>  <ramp-coreload>
+label = CPU:
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+;ramp-coreload-6-foreground = #ff5555
+ramp-coreload-6-foreground = #d33434
+ramp-coreload-7 = █
+;ramp-coreload-7-foreground = #ff5555
+ramp-coreload-7-foreground = #d33434
+
+[module/memory]
+type = internal/memory
+format = <label>  <bar-used>
+label = RAM:  %gb_used%
+
+bar-used-width = 20
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #444444
+
+[module/clock-date]
+type = internal/date
+interval = 1
+
+format = <label>
+label = %date% %time%
+
+time = %H:%M
+date-alt = %d %B %Y %H:%M:%S
+
+; vim:ft=dosini
