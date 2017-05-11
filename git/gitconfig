@@ -1,0 +1,15 @@
+[include]
+  path = ~/.gitconfig.local
+[user]
+  name = Dmytro Nechai
+  email = nechaido@gmail.com
+[push]
+  default = current
+[pull]
+  rebase = true
+[core]
+  editor = nvim
+[commit]
+  gpgsign = true
+[apply]
+  whitespace = fix
