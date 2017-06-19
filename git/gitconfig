@@ -1,8 +1,5 @@
 [include]
   path = ~/.gitconfig.local
-[user]
-  name = Dmytro Nechai
-  email = nechaido@gmail.com
 [push]
   default = current
 [pull]
@@ -13,3 +10,5 @@
   gpgsign = true
 [apply]
   whitespace = fix
+[alias]
+  ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
