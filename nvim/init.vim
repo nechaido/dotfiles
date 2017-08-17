@@ -9,14 +9,28 @@ Plug 'zchee/deoplete-clang'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
-Plug 'neomake/neomake'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'wellle/tmux-complete.vim'
+
+" Linting
+Plug 'w0rp/ale'
 
 " Syntax higlight
-Plug 'arakashic/chromatica.nvim', { 'do': ':UpdateRemotePlugins' }
-
+Plug 'othree/html5.vim'
+Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
+Plug 'fleischie/vim-styled-components'
+Plug 'arakashic/chromatica.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'rust-lang/rust.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'cespare/vim-toml'
+
+" Tmux integration
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Save keystrokes
 Plug 'easymotion/vim-easymotion'
@@ -47,19 +61,13 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-" Linter
-autocmd! BufWritePost * Neomake
+let g:ale_linters = {
+  \    'c':          ['cppcheck',  'clang'],
+  \    'cpp':        ['clangtidy', 'cppcheck', 'cpplint', 'clang'],
+  \    'javascript': ['eslint'],
+  \  }
 
-let g:neomake_highlight_lines=1
-
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-let g:neomake_cpp_clang_maker = {
-      \ 'exe' : 'clang++',
-      \ 'args' : ['-std=c++11', '-pedantic', '-Wall', '-ferror-limit=0']
-      \}
-
-let g:neomake_cpp_enabled_makers = ['clang']
+let g:airline#extensions#ale#enabled = 1
 
 " Completition
 let g:deoplete#enable_at_startup = 1
@@ -74,6 +82,11 @@ let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 " Use tern_for_vim.
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
+let g:tern#filetypes = ['javascript', 'jsx', 'javascript.jsx']
+
+" JavaScript settings
+let g:javascript_plugin_flow = 1
+let g:jsx_ext_required = 0
 
 " Syntax highlight
 syntax on
@@ -170,27 +183,11 @@ nnoremap <leader>u :GundoToggle<CR>
 " NERDTreee shortcuts
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" nvim terminal return to normal mode
-tnoremap <Esc> <C-\><C-n>
-
-" windows navigarion
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " ------------------------------------------------------------------------------
 "  COLORSCHEME
 " ------------------------------------------------------------------------------
+set termguicolors
 set background=dark
 colorscheme gruvbox
 
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 1
