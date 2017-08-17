@@ -4,7 +4,7 @@ set $mod Mod1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -71,17 +71,17 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Tab workspace back_and_forth
 
 # default monitors
-workspace 1 output eDP-1
-workspace 2 output eDP-1
-workspace 3 output eDP-1
-workspace 4 output eDP-1
+workspace 1 output eDP1
+workspace 2 output eDP1
+workspace 3 output eDP1
+workspace 4 output eDP1
 
-workspace 5 output HDMI-1
-workspace 6 output HDMI-1
-workspace 7 output HDMI-1
-workspace 8 output HDMI-1
-workspace 9 output HDMI-1
-workspace 10 output HDMI-1
+workspace 5 output DP1
+workspace 6 output DP1
+workspace 7 output DP1
+workspace 8 output DP1
+workspace 9 output DP1
+workspace 10 output DP1
 
 # default layout
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layouts/workspace_1.json'"
@@ -145,58 +145,60 @@ set $default_gaps_outer 0
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
-set $base00 #181818
-set $base01 #282828
-set $base02 #383838
-set $base03 #585858
-set $base04 #b8b8b8
-set $base05 #d8d8d8
-set $base06 #e8e8e8
-set $base07 #f8f8f8
-set $base08 #ab4642
-set $base09 #dc9656
-set $base0A #f7ca88
-set $base0B #a1b56c
-set $base0C #86c1b9
-set $base0D #7cafc2
-set $base0E #ba8baf
-set $base0F #a16946
+set $base00 #282828
+set $base01 #cc241d
+set $base02 #98971a
+set $base03 #d79921
+set $base04 #458588
+set $base05 #b16286
+set $base06 #689d6a
+set $base07 #a89984
+set $base08 #928374
+set $base09 #fb4934
+set $base0A #b8bb26
+set $base0B #fabd2f
+set $base0C #83a598
+set $base0D #d3869b
+set $base0E #8ec07c
+set $base0F #ebdbb2
 
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0D
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
+client.focused          $base02 $base00 $base0F $base0E $base02
+client.focused_inactive $base04 $base00 $base0F $base0E $base04
+client.unfocused        $base08 $base00 $base0F $base0E $base08
+client.urgent           $base01 $base00 $base0F $base0E $base01
+client.placeholder      $base00 $base00 $base0F $base0E $base00
+client.background       $base00
 
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 4
 
 hide_edge_borders smart
 
+# bar {
+#   status_command ~/Projects/greshake/i3status-rust/target/release/i3status-rs ~/.config/i3/i3status-rust.toml
+#   font pango:Sauce Code Mono
+#   position top
+#   mode hide
+#   modifier $mod
+#   colors {
+#     separator $base03
+#     background $base00
+#     statusline $base03
+#     focused_workspace  $base08 $base02 $base0F
+#     active_workspace   $base08 $base04 $base0F
+#     inactive_workspace $base08 $base00 $base0F
+#     urgent_workspace   $base08 $base01 $base0F
+#   }
+# }
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
 exec_always --no-startup-id feh --bg-fill ~/.config/i3/wallpaper.jpg &
-
-exec --no-startup-id ibus-daemon -d &
 
 exec --no-startup-id compton -cCb &
 exec --no-startup-id nm-applet &
 exec --no-startup-id pasystray -a &
 exec --no-startup-id xfce4-power-manager &
 
-exec --no-startup-id konsole &
-exec --no-startup-id konsole &
-exec --no-startup-id konsole &
-exec --no-startup-id konsole &
-exec --no-startup-id konsole &
-
-exec --no-startup-id firefox
-exec --no-startup-id firefox
-
-exec --no-startup-id /opt/Telegram/Telegram &
-exec --no-startup-id slack &
-
-exec_always --no-startup-id ibus restart &
+exec --no-startup-id telegram-desktop &
 
 # vim:filetype=i3
-
