@@ -44,6 +44,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Markdown TOC
+Plug 'mzlogin/vim-markdown-toc'
+
 " UI
 Plug 'scrooloose/nerdtree'
 
@@ -65,6 +68,8 @@ let g:ale_linters = {
   \    'c':          ['cppcheck',  'clang'],
   \    'cpp':        ['clangtidy', 'cppcheck', 'cpplint', 'clang'],
   \    'javascript': ['eslint'],
+  \     'gitcommit': ['proselint', 'vale'],
+  \     'text':      ['proselint', 'vale']
   \  }
 
 let g:airline#extensions#ale#enabled = 1
@@ -78,6 +83,10 @@ let g:deoplete#delimeters = ['/', '.']
 
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+
+let g:deoplete#sources#rust#racer_binary = expand('~/.cargo/bin/racer')
+let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
+let g:deoplete#sources#rust#show_duplicates = 1
 
 " Use tern_for_vim.
 let g:tern#command = ["tern"]
@@ -142,6 +151,8 @@ autocmd FileType gitcommit setlocal spell
 autocmd FileType text      setlocal spell
 autocmd FileType plaintex  setlocal spell
 autocmd FileType tex       setlocal spell
+autocmd FileType markdown  setlocal spell
+autocmd FileType rst       setlocal spell
 
 " Enable alternative keyboard layout (C-^ to switch)
 set keymap=russian-jcuken
@@ -149,8 +160,8 @@ set iminsert=0
 set imsearch=0
 
 " Easier keyboard mappings for keyboard layout switching
-inoremap <M-Space> <C-^>
-nnoremap <M-Space> a<C-^><Esc>
+inoremap <C-Space> <C-^>
+nnoremap <C-Space> a<C-^><Esc>
 
 " Splits
 set splitbelow
@@ -176,6 +187,7 @@ nmap <leader>/ :nohlsearch<CR>
 
 " Fix style
 nnoremap <leader>jsf :!eslint --fix %<CR>
+nnoremap <leader>rf :RustFmt<CR>
 
 " Show the undo tree
 nnoremap <leader>u :GundoToggle<CR>
