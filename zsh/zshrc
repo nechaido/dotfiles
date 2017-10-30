@@ -57,11 +57,15 @@ autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
-# Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# Load NVS
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 export TERM="xterm-256color"
+export EDITOR="nvim"
 
 alias bb="sudo bb-wrapper"
 alias sleep="systemctl suspend"
