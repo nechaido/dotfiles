@@ -6,11 +6,14 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-clang'
 
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install -g tern' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'wellle/tmux-complete.vim'
+
+" Language Server
+Plug 'autozimu/LanguageClient-neovim', {
+  \  'branch': 'next',
+  \  'do': 'bash install.sh',
+  \}
 
 " Linting
 Plug 'w0rp/ale'
@@ -88,10 +91,13 @@ let g:deoplete#sources#rust#racer_binary = expand('~/.cargo/bin/racer')
 let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
 let g:deoplete#sources#rust#show_duplicates = 1
 
-" Use tern_for_vim.
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:tern#filetypes = ['javascript', 'jsx', 'javascript.jsx']
+" LanguageClient settings
+
+let g:LanguageClient_serverCommands = {
+  \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
+  \ 'javascript':     ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
+  \}
 
 " JavaScript settings
 let g:javascript_plugin_flow = 1
@@ -187,7 +193,8 @@ nmap <leader>/ :nohlsearch<CR>
 
 " Fix style
 nnoremap <leader>jsf :!eslint --fix %<CR>
-nnoremap <leader>rf :RustFmt<CR>
+nnoremap <leader>rf  :RustFmt<CR>
+nnoremap <leader>f   :ALEFix<CR>
 
 " Show the undo tree
 nnoremap <leader>u :GundoToggle<CR>
