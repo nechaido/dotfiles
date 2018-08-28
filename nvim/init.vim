@@ -68,12 +68,16 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:ale_linters = {
-  \    'c':          ['cppcheck',  'clang'],
-  \    'cpp':        ['clangtidy', 'cppcheck', 'cpplint', 'clang'],
-  \    'javascript': ['eslint'],
-  \     'gitcommit': ['proselint', 'vale'],
-  \     'text':      ['proselint', 'vale']
-  \  }
+  \  'c':          ['cppcheck',  'clang'],
+  \  'cpp':        ['clangtidy', 'cppcheck', 'cpplint', 'clang'],
+  \  'javascript': ['eslint', 'prettier'],
+  \  'json':       ['prettier'],
+  \}
+
+let g:ale_fixers = {
+  \ 'javascript': ['eslint', 'prettier'],
+  \ 'json':       ['prettier'],
+  \}
 
 let g:airline#extensions#ale#enabled = 1
 
