@@ -64,6 +64,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'iCyMind/NeoSolarized'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -211,6 +212,6 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 " ------------------------------------------------------------------------------
 set termguicolors
 set background=dark
-colorscheme gruvbox
+colorscheme base16-default-dark
 
 let g:airline_powerline_fonts = 1
