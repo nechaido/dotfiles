@@ -60,10 +60,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Colorschemes
-Plug 'iCyMind/NeoSolarized'
-Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized'
 
 call plug#end()
 
@@ -206,7 +205,11 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 "  COLORSCHEME
 " ------------------------------------------------------------------------------
 set termguicolors
+
+let g:solarized_termcolors=256
 set background=dark
-colorscheme base16-default-dark
+colorscheme NeoSolarized
+
+let g:neosolorized_italic = 1
 
 let g:airline_powerline_fonts = 1
