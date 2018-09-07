@@ -25,6 +25,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'fleischie/vim-styled-components'
 Plug 'arakashic/chromatica.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'rust-lang/rust.vim'
+
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'cespare/vim-toml'
 
@@ -183,6 +184,7 @@ let g:gundo_close_on_revert = 1
 " ------------------------------------------------------------------------------
 "  KEYBINDINGS
 " ------------------------------------------------------------------------------
+set mouse=a
 
 " Setup a convenient leader key
 let mapleader = ','
