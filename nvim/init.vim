@@ -6,7 +6,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-clang'
 
-Plug 'sebastianmarkow/deoplete-rust'
 Plug 'wellle/tmux-complete.vim'
 
 " Language Server
@@ -91,10 +90,6 @@ let g:deoplete#delimeters = ['/', '.']
 
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-
-let g:deoplete#sources#rust#racer_binary = expand('~/.cargo/bin/racer')
-let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
-let g:deoplete#sources#rust#show_duplicates = 1
 
 " LanguageClient settings
 
